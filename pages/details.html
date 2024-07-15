@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="shortcut icon" href="../images/Moviestack_favicon.png" type="image/x-icon">
+    <title>MOVIESTACK | DETAILS</title>
+</head>
+
+<body class="text-black bg-zinc-300">
+    <header class="border-2 border-b-white bg-black pr-8">
+        <div class="flex items-center justify-between">
+            <div class="flex justify-start">
+                <img class="w-24" src="/assets/images/Moviestack_isotipo.png" alt="logotipo moviestack">
+                <img class="w-44" src="/assets/images/Moviestack_logotipo2.png" alt="logo moviestack">
+            </div>
+            <h1 class="text-white text-4xl">MOVIESTACK | DETAILS</h1>
+            <nav>
+                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg p-1 bg-black hover:bg-violet-700 sm: w-40 text-center"
+                    href="../index.html">HOME</a>
+                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg p-1 bg-violet-700 hover:bg-violet-700 sm: w-40 text-center"
+                    href="/pages/movies.html">MOVIES</a>
+                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg p-1 bg-black hover:bg-violet-700 sm: w-40 text-center"
+                    href="#">FAVS</a>
+            </nav>
+
+        </div>
+    </header>
+    <main class="min-h-screen bg-zinc-300">
+        <div class="flex flex-wrap justify-center mb-5 mt-5 w-full" id="moviesDetails">
+            <img class="object-cover w-2/5 rounded-lg" id="detailImagen" alt="imagen-película">
+            <div class="flex flex-col items-center w-2/5 gap-5">
+                <h2 class="text-3xl w-5/6" id="detailTitle"></h2>
+                <p class="text-xl w-5/6" id="detailTagline"></p>
+                <p id="detailGenres" class="w-5/6"></p>
+                <p class="w-5/6" id="detailOverview"></p>
+            </div>
+            <table>
+                <tr>
+                    <th>Original Language</th>
+                    <td id="detailOriginalLanguage"></td>
+                </tr>
+                <tr>
+                    <th>Release Date</th>
+                    <td id="detailReleaseDate"></td>
+                </tr>
+                <tr>
+                    <th>Runtime</th>
+                    <td id="detailRuntime"></td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td id="detailStatus"></td>
+                </tr>
+                <tr>
+                    <th>Vote Average</th>
+                    <td id="detailVoteAverage"></td>
+                </tr>
+                <tr>
+                    <th>Budget</th>
+                    <td id="detailBudget"></td>
+                </tr>
+                <tr>
+                    <th>Revenue</th>
+                    <td id="detailRevenue"></td>
+                </tr>
+            </table>
+        </div>
+
+    </main>
+    <footer class="border-2 border-t-white h-14 flex items-center justify-center bg-black text-white">
+        <p class="text-2xl">MindHun - Cohort N°53</p>
+    </footer>
+
+
+    <script src="../moviesData.js"></script>
+    <script src="../details.js"></script>
+
+</body>
+
+</html>
