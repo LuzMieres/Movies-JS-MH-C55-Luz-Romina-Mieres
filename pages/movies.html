@@ -2,51 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="shortcut icon" href="../assets/images/Moviestack_favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="shortcut icon" href="/assets/images/Moviestack_favicon.png" type="image/x-icon">
     <title>MOVIESTACK | MOVIES</title>
 </head>
 
-<body class="flex flex-col items-center text-white">
-    <header class="border-2 border-b-white bg-black w-full pr-8">
-        <div class="flex flex-wrap items-center items-center justify-between w-full">
-            <div class="flex">
-                <img class="w-20" src="../assets/images/Moviestack_isotipo.png" alt="logotipo moviestack" />
-                <img class="w-32" src="../assets/images/Moviestack_logotipo2.png" alt="logo moviestack" />
+<body class="text-white bg-gray-300 min-h-screen flex flex-col">
+    <header class="border-2 border-b-white bg-black">
+        <div class="flex items-center justify-between">
+            <div class="flex justify-start">
+                <img class="w-16" src="/assets/images/Moviestack_isotipo.png" alt="logotipo moviestack">
+                <img class="w-28" src="/assets/images/Moviestack_logotipo2.png" alt="logo moviestack">
             </div>
             <H1 class="text-white text-4xl">MOVIESTACK | MOVIES</H1>
             <nav>
-                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg p-1 bg-black hover:bg-violet-700 sm: w-40 text-center"
-                    href="../index.html">HOME</a>
-                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg p-1 bg-violet-700 hover:bg-violet-700 sm: w-40 text-center"
-                    href="#">MOVIES</a>
-                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg p-1 bg-black hover:bg-violet-700 sm: w-40 text-center"
-                    href="#">FAVS</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-black hover:bg-violet-700" href="../index.html">HOME</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-violet-700 hover:bg-violet-700" href="#">MOVIES</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-black hover:bg-violet-700" href="./favs.html">FAVS</a>
             </nav>
         </div>
     </header>
-    <main class="min-h-screen bg-zinc-300">
-        <img class="w-screen h-80 object-cover" src="../assets/images/banner-movies.jpg" alt="banner cinema" />
+    <main class="flex-1 text-black">
+        <img class="w-screen h-80 object-cover" src="/assets/images/banner-movies.jpg" alt="banner cinema">
+
         <div class="flex justify-around mt-5 mb-5">
-            <label for="generoSelect"></label>
-            <select class="w-80 h-10 text-black rounded-lg" id="selectGenre">
+            <label for="selectGenre"></label>
+            <select class="w-80 h-10 text-black" id="selectGenre">
                 <option value="all">All</option>
             </select>
+
             <label for="inputSearch"></label>
-            <input class="w-80 h-10 text-black rounded-lg" type="text" id="inputSearch"
-                placeholder="Enter the name of the movie...">
+            <input class="w-80 h-10 text-black" type="text" id="inputSearch" placeholder="Ingrese el nombre de la película">
         </div>
 
-        <div class="flex flex-wrap justify-center gap-3 pb-3 mt-3" id="container"></div>
+        <div class="flex flex-wrap justify-center gap-3 pb-3 mt-3" id="container">
+
+        </div>
     </main>
-    <footer class="border-2 border-t-white h-14 flex items-center justify-center bg-black w-full">
-        <p class="text-2xl">MindHub - Cohort N°55</p>
+    <footer class="border-2 border-t-white h-14 flex items-center justify-center bg-black text-white">
+        <p>MindHub - Cohort N°53</p>
     </footer>
 
-    <script src="/moviesdata.js"></script>
-    <script src="/moviestack.js"></script>
+    <script src="../moviestack.js"></script>
 </body>
 
 </html>

@@ -2,56 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="shortcut icon" href="./assets/images/Moviestack_favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/images/Moviestack_favicon.png" type="image/x-icon">
     <title>MOVIESTACK | HOME</title>
 </head>
 
-<body class="text-white">
+<body class="text-white bg-gray-300 min-h-screen flex flex-col justify-center items-center">
     <header class="border-2 border-b-white bg-black w-full">
-        <div class="flex items-center justify-between pr-4">
+        <div class="flex items-center justify-between">
             <div class="flex justify-start">
-                <img class="w-24 animate-bounce" src="./assets/images/Moviestack_isotipo.png" alt="logotipo moviestack" />
-                <img class="w-44 animate-bounce" src="./assets/images/Moviestack_logotipo2.png" alt="logo moviestack" />
+                <img class="w-16" src="./assets/images/Moviestack_isotipo.png" alt="logotipo moviestack">
+                <img class="w-28" src="./assets/images/Moviestack_logotipo2.png" alt="logo moviestack">
             </div>
             <h1 class="text-white text-4xl">MOVIESTACK | HOME</h1>
             <nav>
-                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg bg-violet-700 hover:bg-violet-700" href="#">HOME</a>
-                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg bg-black hover:bg-violet-700" href="./pages/movies.html">MOVIES</a>
-                <a class="text-white border-solid border-2 border-white mr-1 p-2 rounded-lg bg-black hover:bg-violet-700" href="#">FAVS</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-violet-700 hover:bg-violet-700" href="#">HOME</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-black hover:bg-violet-700" href="./pages/movies.html">MOVIES</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-black hover:bg-violet-700" href="./pages/favs.html">FAVS</a>
             </nav>
         </div>
     </header>
-    <main class=" flex flex-col items-center bg-zinc-300">
-        <img class="w-screen h-80 object-cover" src="./assets/images/banner-movies.jpg" alt="" />
-        <p class="text-black w-9/12 text-2xl">
-            Welcome to our movies page, a space dedicated to all movie lovers. Here
+    <main class="flex-1 items-center justify-center text-black">
+        <img class="w-screen h-80 object-cover" src="./assets/images/banner-movies.jpg" alt="">
+        <p class="text-black text-center w-9/12 text-2xl ml-60">Welcome to our movies page, a space dedicated to all movie lovers. Here
             you will find a wide selection of titles, from timeless classics to the
             latest releases. Our goal is to provide you with a unique experience,
             allowing you to discover new stories, explore diverse genres and immerse
             yourself in the world of the seventh art. Enjoy our recommendations,
             in-depth reviews, and exclusive content designed to enrich your passion
-            for movies. Get ready for an unforgettable cinematic adventure!
-        </p>
+            for movies. Get ready for an unforgettable cinematic adventure!</p>
         <div class="flex flex-wrap justify-center gap-10 mt-8 pb-4">
-            <div class="flex flex-col items-center justify-center w-60 h-32 text-center text-black border-solid border-2 border-white rounded-2xl bg-violet-200 shadow-2xl">
-                <p class="font-bold">MORE THAN MOVIES</p>
-                <a class="border-solid border-2 text-xl border-white mt-1 rounded-lg p-2 bg-violet-300 hover:bg-violet-700"
-                    href="./pages/movies.html">CLICK VIEW MORE</a>
+            <div class="flex flex-col justify-center items-center w-72 h-72 text-center text-black border-2 border-white rounded-2xl bg-violet-200 shadow-2xl">
+                <h2 class="text-xl font-semibold">MOVIES</h2>
+                <a class="text-2xl p-5 border-2 border-white mt-1 rounded-lg bg-violet-300 hover:bg-violet-700" href="./pages/movies.html">Click aquí para ver</a>
             </div>
-            <div class="flex flex-col items-center justify-center w-60 h-32 text-center text-black border-solid border-2 border-white rounded-2xl bg-violet-200 shadow-2xl">
-                <P class="font-bold">MORE THAN FAVS</P>
-                <a class="border-solid border-2 text-xl border-white mt-1 rounded-lg p-2 bg-violet-300 hover:bg-violet-700"
-                    href="#">CLICK VIEW MORE</a>
+            <div class="flex flex-col justify-center items-center w-72 h-72 text-center text-black border-2 border-white rounded-2xl bg-violet-200 shadow-2xl">
+                <h2 class="text-xl font-semibold">FAVS</h2>
+                <a class="text-2xl p-5 border-2 border-white mt-1 rounded-lg bg-violet-300 hover:bg-violet-700" href="./pages/favs.html">Click aquí para ver</a>
             </div>
         </div>
     </main>
-    <footer class="border-2 border-t-white h-14 flex items-center justify-center bg-black">
-        <p class="text-2xl">MindHub - Cohort N°55</p>
+    <footer class="border-2 border-t-white h-14 flex items-center justify-center bg-black w-full">
+        <p>MindHub - Cohort N°53</p>
     </footer>
-    <script src="./moviesdata.js"></script>
     <script src="./moviestack.js"></script>
 </body>
 

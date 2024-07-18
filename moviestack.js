@@ -1,86 +1,168 @@
+const api = "0ff70d54-dc0b-4262-9c3d-776cb0f34dbd";
 let container = document.getElementById('container');
+let selectGenre = document.getElementById('selectGenre');
 let inputSearch = document.getElementById('inputSearch');
-let moviesDetails = document.getElementById('moviesDetails');
+let detailsMovies = document.getElementById('detailsMovies');
 
-//Creo la estructura básica de una card HTML
-function cardStructure(image, title, tagline, overview) {
-    return `<div class="flex flex-col items-center justify-between pb-1 w-96 h-96 shadow-2xl border-solid border-2 border-white rounded-2xl text-center bg-violet-200 text-black">
-        <img class="h-40 w-96 object-cover rounded-t-2xl" src="${image}" alt="imagen-película">
-        <h4 class="font-bold">${title}</h4>
-        <p class="px-3 text-xs">${tagline}</p>
-        <p class="pb-1 text-xs">${overview}</p>
-        <a class="w-24 text-white border-solid border-2 border-white mr-1 p-1 rounded-lg p-1 bg-black hover:bg-violet-700" href="#" onclick="showDetails('${title}')">View details</a>
-    </div>`;
-}
+// Función para obtener las películas
+function fetchMovies() {
+    fetch("https://moviestack.onrender.com/api/movies", {
+        headers: {
+            "X-API-Key": api
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const movies = data.movies.filter((movie) => movie != null);
+        fillSelect(getGenres(movies)); // Llenamos el dropdown de géneros
+        container.innerHTML = printCard(movies); // Mostramos todas las películas
 
-//Imprimo cada card 
-function structureCards(listMovies) {
-    let cards = "";
-    for (const movie of listMovies) {
-        cards += cardStructure(movie.image, movie.title, movie.tagline, movie.overview, movie.genres);
-    }
-    return cards;
-}
+        container.addEventListener('click', (e) => {
+            // Verificamos si se hizo clic en el botón del corazón
+            if (e.target.tagName === 'IMG' && e.target.dataset.id) {
+                const movieId = e.target.dataset.id;
+                changeFavorites(movieId); // Cambiamos el estado de favoritos
+                updateHeartIcon(e.target); // Actualizamos el ícono del corazón dinámicamente
+                propagateFavorites(); // Propagamos los cambios a favs.html
+            }
+        });
 
-function getGenres(listMovies) {
-    // Obtengo todos los géneros únicos de las películas
-    let uniqueGeneros = [];
-    for (const movie of listMovies) {
-        for (const genre of movie.genres) {
-            if (!uniqueGeneros.includes(genre)) {
-                uniqueGeneros.push(genre);
+        function structureCards(image, title, tagline, overview, id) {
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            const fav = favorites.includes(id);
+            if (fav) {
+                return `
+                <div class="flex flex-col items-center justify-between bg-violet-600 shadow-lg shadow-indigo-500/40 h-[400px] w-96 object-cover rounded-2xl border border-black">
+                    <div class="relative">
+                        <img class="h-[200px] w-96 object-cover rounded-t-2xl"
+                            src="https://moviestack.onrender.com/static/${image}" alt="imagen-película">
+                        <button data-id="${id}">
+                            <img data-id="${id}" class="absolute top-1 right-1 w-20 h-10 heart-icon" src="/assets/images/love-heart-love-icon-on-transparent-background-free-png.png" alt="logo corazon">
+                        </button>
+                    </div>
+                    <div class="flex flex-col items-center overflow-y-auto h-72 p-5 custom-scrollbar">
+                        <h4 class="font-bold text-xl">${title}</h4>
+                        <p class="p-2 text-lg">${tagline}</p>
+                        <p class="pb-3 text-ms">${overview}</p>
+                        <a class="w-32 text-center text-white border-solid border-2 border-white mr-1 p-1 rounded-lg p-1 bg-black hover:bg-violet-700"
+                            href="./details.html?id=${id}" onclick="showDetails('${title}')">View Details</a>
+                    </div>
+                </div>`;
+            } else {
+                return `
+                <div class="flex flex-col items-center justify-between bg-violet-600 shadow-lg shadow-indigo-500/40 h-[400px] w-96 object-cover rounded-2xl border border-black">
+                    <div class="relative">
+                        <img class="h-[200px] w-96 object-cover rounded-t-2xl"
+                            src="https://moviestack.onrender.com/static/${image}" alt="imagen-película">
+                        <button data-id="${id}">
+                            <img data-id="${id}" class="absolute top-1 right-1 w-20 h-10 heart-icon" src="/assets/images/logo-corazon-vacio.png" alt="logo corazon">
+                        </button>
+                    </div>
+                    <div class="flex flex-col items-center overflow-y-auto w-96 h-72 p-5 custom-scrollbar">
+                        <h4 class="font-bold text-xl">${title}</h4>
+                        <p class="p-2 text-lg">${tagline}</p>
+                        <p class="pb-3 text-ms">${overview}</p>
+                        <a class="w-32 text-center text-white border-solid border-2 border-white mr-1 p-1 rounded-lg p-1 bg-black hover:bg-violet-700"
+                            href="./details.html?id=${id}" onclick="showDetails('${title}')">View Details</a>
+                    </div>
+                </div>`;
             }
         }
-    }
-    return uniqueGeneros;
+
+        function changeFavorites(id) {
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            const index = favorites.indexOf(id);
+            if (index === -1) {
+                favorites.push(id); // Agregamos la película a favoritos
+            } else {
+                favorites.splice(index, 1); // Quitamos la película de favoritos
+            }
+            localStorage.setItem("favorites", JSON.stringify(favorites)); // Guardamos en localStorage
+        }
+
+        function printCard(listMovies) {
+            let cards = "";
+            for (const movie of listMovies) {
+                cards += structureCards(movie.image, movie.title, movie.tagline, movie.overview, movie.id);
+            }
+            return cards;
+        }
+
+        function getGenres(listMovies) {
+            let uniqueGenres = [];
+            for (const movie of listMovies) {
+                for (const genre of movie.genres) {
+                    if (!uniqueGenres.includes(genre)) {
+                        uniqueGenres.push(genre);
+                    }
+                }
+            }
+            return uniqueGenres;
+        }
+
+        function fillSelect(genres) {
+            for (const genre of genres) {
+                let option = document.createElement('option');
+                option.value = genre;
+                option.text = genre;
+                selectGenre.add(option);
+            }
+        }
+
+        function showDetails(title) {
+            const id = location.search;
+            return id;
+        }
+
+        function updateHeartIcon(heartIcon) {
+            if (heartIcon.src.includes("logo-corazon-vacio.png")) {
+                heartIcon.src = "/assets/images/love-heart-love-icon-on-transparent-background-free-png.png";
+            } else {
+                heartIcon.src = "/assets/images/logo-corazon-vacio.png";
+            }
+        }
+
+        function propagateFavorites() {
+            // Enviamos una señal de que los favoritos han sido actualizados
+            const event = new CustomEvent('favoritesUpdated');
+            window.dispatchEvent(event);
+        }
+
+        selectGenre.addEventListener('change', filterMovies);
+
+        inputSearch.addEventListener('input', filterMovies);
+
+        function filterMovies() {
+            let selectedGenre = selectGenre.value;
+            let nameSearch = inputSearch.value.trim().toLowerCase();
+
+            let leakedMovies;
+
+            if (selectedGenre === 'all') {
+                leakedMovies = movies.filter(movie =>
+                    nameSearch === '' || movie.title.toLowerCase().includes(nameSearch)
+                );
+            } else {
+                leakedMovies = movies.filter(movie =>
+                    movie.genres.includes(selectedGenre) &&
+                    (nameSearch === '' || movie.title.toLowerCase().includes(nameSearch))
+                );
+            }
+
+            if (leakedMovies.length > 0) {
+                container.innerHTML = printCard(leakedMovies);
+            } else {
+                container.innerHTML = '<p>No results found!</p>';
+            }
+        }
+
+        filterMovies();
+    })
+    .catch(error => console.log(error));
 }
-let genres = getGenres(movies);
 
-function fillSelect(genres) {
-    let selectGenre = document.getElementById('selectGenre');
-    for (const genre of genres) {
-        let option = document.createElement('option');
-        option.value = genre;
-        option.text = genre;
-        selectGenre.add(option);
-    }
-}
-fillSelect(genres);
+// Escuchamos el evento de actualización de favoritos
+window.addEventListener('favoritesUpdated', fetchMovies);
 
-function showDetails(title) {
-    let movie = movies.find(movie => movie.title === title);
-
-    // Redirige a la página de detalles con los parámetros de la película
-    window.location.href = `details.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(movie.image)}&tagline=${encodeURIComponent(movie.tagline)}&genres=${encodeURIComponent(movie.genres.join(', '))}&overview=${encodeURIComponent(movie.overview)}&original_language=${encodeURIComponent(movie.original_language)}&release_date=${encodeURIComponent(movie.release_date)}&runtime=${encodeURIComponent(movie.runtime)}&status=${encodeURIComponent(movie.status)}&vote_average=${encodeURIComponent(movie.vote_average)}&budget=${encodeURIComponent(movie.budget)}&revenue=${encodeURIComponent(movie.revenue)}`;
-}
-
-selectGenre.addEventListener('change', filterMovies);
-
-inputSearch.addEventListener('input', filterMovies);
-
-function filterMovies() {
-    let selectGenre = document.getElementById('selectGenre');
-    let selectedGenre = selectGenre.value;
-    let nameSearch = inputSearch.value.trim().toLowerCase();
-
-    let leakedMovies;
-
-    if (selectedGenre === 'all') {
-        leakedMovies = movies.filter(movie =>
-            nameSearch === '' || movie.title.toLowerCase().includes(nameSearch)
-        );
-    } else {
-        leakedMovies = movies.filter(movie =>
-            movie.genres.includes(selectedGenre) &&
-            (nameSearch === '' || movie.title.toLowerCase().includes(nameSearch))
-        );
-    }
-
-    if (leakedMovies.length > 0) {
-        container.innerHTML = structureCards(leakedMovies);
-    } else {
-        container.innerHTML = '<p>No results found!</p>';
-    }
-}
-filterMovies();
-
+// Llamamos a la función para obtener las películas al cargar la página
+fetchMovies();

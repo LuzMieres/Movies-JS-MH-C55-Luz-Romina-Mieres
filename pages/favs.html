@@ -1,46 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/style/style.css">
     <link rel="shortcut icon" href="/assets/images/Moviestack_favicon.png" type="image/x-icon">
-    <title>MOVIESTACK | DETAILS</title>
+    <title>MOVIESTACK | FAVS</title>
 </head>
-
-<body class="text-white bg-zinc-300 min-h-screen flex flex-col">
+<body class="text-white bg-gray-300 min-h-screen flex flex-col">
     <header class="border-2 border-b-white bg-black">
         <div class="flex items-center justify-between">
             <div class="flex justify-start">
                 <img class="w-16" src="/assets/images/Moviestack_isotipo.png" alt="logotipo moviestack">
                 <img class="w-28" src="/assets/images/Moviestack_logotipo2.png" alt="logo moviestack">
             </div>
-            <h1 class="text-white text-4xl">MOVIESTACK | DETAILS</h1>
+            <H1 class="text-white text-4xl">MOVIESTACK | FAVS</H1>
             <nav>
-                <a class=" w-7 text-white border-solid border-2 border-white mr-1 p-1 rounded-lg p-1 bg-black hover:bg-violet-700"
-                    href="../index.html">HOME</a>
-                <a class="w-7 text-white border-solid border-2 border-white mr-1 p-1 rounded-lg p-1 bg-black hover:bg-violet-700"
-                    href="./movies.html">MOVIES</a>
-                <a class="w-7 text-white border-solid border-2 border-white mr-1 p-1 rounded-lg p-1 bg-black hover:bg-violet-700"
-                    href="./favs.html">FAVS</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-black hover:bg-violet-700" href="../index.html">HOME</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-black hover:bg-violet-700" href="./movies.html">MOVIES</a>
+                <a class="text-white border-2 border-white mr-1 p-1 rounded-lg bg-violet-700 hover:bg-violet-700" href="#">FAVS</a>
             </nav>
-
         </div>
     </header>
     <main class="flex-1 text-black">
-        <div id="detailsMovies">
+        <img class="w-screen h-80 object-cover" src="/assets/images/banner-movies.jpg" alt="banner Favs">
+        <div id="favoritesContainer" class="grid grid-cols-3 gap-4 p-4">
 
+        </div>
     </main>
     <footer class="border-2 border-t-white h-14 flex items-center justify-center bg-black text-white">
         <p>MindHub - Cohort N°53</p>
     </footer>
-    
-
-
-    <script type="module" src="../details.js"></script>
-
+    <script src="../favs.js"></script>
 </body>
-
 </html>
